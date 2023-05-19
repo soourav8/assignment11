@@ -8,14 +8,15 @@ const Footer = () => {
         <div>
             <footer className="footer md:p-10 lg:p-10 bg-[#B8E7E1]  flex   flex-col items-center md:flex-row lg:flex-row   lg:justify-between md:justify-between">
                 <div >
-                    <img className='h-[5rem]' src={logo} alt="logo" />
-                    <p className='font-extrabold text-3xl '>Toy Cars</p>
+                    <img className='h-[2rem] lg:h-[5rem]' src={logo} alt="logo" />
+                    <p className='text-xl font-bold lg:font-extrabold lg:text-3xl '>Toy Shop</p>
                     <p className='font-bold text-neutral-600'>The Toy Store</p>
                 </div>
 
                 <div >
-                    <span className="footer-title">Important Links</span>
+                    <span className="footer-title">Useful Links</span>
                     
+                   
                     <Link to='' className="link link-hover">Branding</Link>
                     
                     <Link to='' className="link link-hover">Design</Link>
@@ -23,6 +24,7 @@ const Footer = () => {
                     <Link to='' className="link link-hover">Marketing</Link>
                     
                     <Link to='' className="link link-hover">Advertisement</Link>
+                    
                 </div>
                 <div>
                     <span className="footer-title">Menu</span>
