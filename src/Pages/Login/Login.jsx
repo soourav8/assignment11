@@ -1,12 +1,29 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
+import { AuthContext } from '../../provider/AuthProvider';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
+
+
 
 const Login = () => {
+    const [success, setSuccess] = useState("")
+    const {login} = useContext(AuthContext)
+    const navigate = useNavigate()
+    
     const handleLogin = event =>{
         event.preventDefault()
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(email,password)
+        login(email, password)
+        .then(result =>{
+           const user = result.user;
+          console.log(user)
+          if(user){
+            setSuccess("Login Successful")
+            navigate('/')
+          }
+
+        })
     }
 
 
@@ -30,13 +47,17 @@ const Login = () => {
                                 </label>
                                 <input type="password" name='password' placeholder="password" className="input input-bordered" />
                                 <label className="label">
-                                    <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
+                                <span>New User? <Link to="/signUp" className=" link link-hover">Sign Up</Link>
+                                    </span>
+                                   
                                 </label>
                             </div>
                             <div className="form-control mt-6">
                                 
                                 <input className="btn btn-primary"  type="submit" value="Login" />
+                                    <p className='text-center text-success'>{success}</p>
                             </div>
+                            
                         </form>
                     </div>
                 </div>
