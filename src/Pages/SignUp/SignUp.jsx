@@ -2,12 +2,17 @@ import React, { useContext, useState } from 'react';
 import { Link } from "react-router-dom";
 import { AuthContext } from '../../provider/AuthProvider';
 import { getAuth, updateProfile } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+
 
 
 const SignUp = () => {
     const [success, setSuccess] = useState('')
     const [error, setError] = useState("")
     const { createUser } = useContext(AuthContext);
+    const navigate = useNavigate()
+
+
 
 
 
@@ -46,6 +51,7 @@ const SignUp = () => {
                 if (user) {
                     console.log(user)
                     setSuccess("Sign Up Successful")
+                    navigate('/')
 
                 }
             })
@@ -55,13 +61,7 @@ const SignUp = () => {
 
 
 
-        //   update user profile name and photo 
-        // userProfile(name, photoUrl)
-        //     .then()
-        //     .catch(error => {
-        //         console.log(error.message)
-        //     })
-
+        
 
 
     }
@@ -78,14 +78,14 @@ const SignUp = () => {
                                 <label className="label">
                                     <span className="label-text">Name</span>
                                 </label>
-                                <input type="text" name='name' placeholder="name" className="input input-bordered" />
+                                <input type="text" name='name' placeholder="name" className="input input-bordered" required />
 
                             </div>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Email</span>
                                 </label>
-                                <input type="email" name='email' placeholder="email" className="input input-bordered" />
+                                <input type="email" name='email' placeholder="email" className="input input-bordered" required />
 
                             </div>
 
@@ -93,7 +93,7 @@ const SignUp = () => {
                                 <label className="label">
                                     <span className="label-text">Photo Url</span>
                                 </label>
-                                <input type="text" name='photoUrl' placeholder="photoUrl" className="input input-bordered" />
+                                <input type="text" name='photoUrl' placeholder="photoUrl" className="input input-bordered" required />
 
 
                             </div>
@@ -101,7 +101,7 @@ const SignUp = () => {
                                 <label className="label">
                                     <span className="label-text">Password</span>
                                 </label>
-                                <input type="password" name='password' placeholder="password" className="input input-bordered" />
+                                <input type="password" name='password' placeholder="password" className="input input-bordered" required />
                                 <label className="label">
                                     <span>Already Registered? <Link to='/login' className=" link link-hover">Login</Link></span>
 
