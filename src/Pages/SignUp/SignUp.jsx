@@ -1,12 +1,14 @@
 import React, { useContext, useState } from 'react';
 import { Link } from "react-router-dom";
 import { AuthContext } from '../../provider/AuthProvider';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, updateProfile } from "firebase/auth";
+
+
 const SignUp = () => {
-    const [success,setSuccess] = useState("")
+    const [success, setSuccess] = useState('')
     const [error, setError] = useState("")
-    const {createUser} = useContext(AuthContext);
-    console.log(createUser)
+    const { createUser } = useContext(AuthContext);
+
 
 
     const handleSignUp = event => {
@@ -16,17 +18,51 @@ const SignUp = () => {
         const email = form.email.value;
         const password = form.password.value;
         const photoUrl = form.photoUrl.value;
-        console.log( name, email, password, photoUrl );
-        createUser(email,password)
-        .then(result =>{
-            const user = result.user;
-            if(user){
-                setSuccess("Sign Up Successful")
-            }
-        })
-      .catch(error => {
-        setError(error.message)
-      })
+
+
+
+        // console.log(name, email, password, photoUrl);
+
+        //create user 
+        createUser(email, password)
+            .then(result => {
+                const user = result.user;
+
+                //update user name and photo Url
+                const auth = getAuth();
+                updateProfile(auth.currentUser, {
+                    displayName: name, photoURL: photoUrl
+                }).then(() => {
+                    // Profile updated!
+                    // ...
+                    console.log("user updated")
+                }).catch((error) => {
+                    // An error occurred
+                    // ...
+                });
+
+
+
+                if (user) {
+                    console.log(user)
+                    setSuccess("Sign Up Successful")
+
+                }
+            })
+            .catch(error => {
+                setError(error.message)
+            })
+
+
+
+        //   update user profile name and photo 
+        // userProfile(name, photoUrl)
+        //     .then()
+        //     .catch(error => {
+        //         console.log(error.message)
+        //     })
+
+
 
     }
 
@@ -68,14 +104,14 @@ const SignUp = () => {
                                 <input type="password" name='password' placeholder="password" className="input input-bordered" />
                                 <label className="label">
                                     <span>Already Registered? <Link to='/login' className=" link link-hover">Login</Link></span>
-                                   
+
                                 </label>
                             </div>
                             <div className="form-control mt-6">
                                 <input className="btn btn-primary" type="submit" value="Sign Up" />
                                 <p className='text-center text-success'>{success}</p>
                                 <p>{error}</p>
-                                
+
                             </div>
                         </form>
                     </div>

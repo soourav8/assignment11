@@ -68,7 +68,9 @@ const handleLogout = () =>{
 
                     </ul>
                 </div>
+                
                 <div className="navbar-end flex-col-reverse items-end  md:flex-row md:gap-9 md:items-center">
+                    {/* navbar logout button  */}
                     {
                         user?.email && <li style={{listStyle: "none"}}><button className='btn btn-outline border-black text-white bg-[#32edcb] btn-xs sm:btn-sm md:btn-md lg:btn-lg' onClick={handleLogout}>Log Out</button></li>
                     }
@@ -77,8 +79,11 @@ const handleLogout = () =>{
                    
                     <div className="">
                         <label  className="btn btn-ghost btn-circle avatar">
+                            {/* navbar user profile image  */}
                             <div className="w-10 rounded-full">
-                                <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                {
+                                    user?.photoURL ? <><img src={user.photoURL} alt="" /></> : <></>
+                                }
                             </div>
                         </label>
                         
