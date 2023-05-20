@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import logo from '../../../images/logo.png'
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../provider/AuthProvider';
+import { Tooltip as ReactTooltip, Tooltip } from 'react-tooltip'
 
 
 
@@ -80,10 +81,12 @@ const handleLogout = () =>{
                     <div className="">
                         <label  className="btn btn-ghost btn-circle avatar">
                             {/* navbar user profile image  */}
-                            <div className="w-10 rounded-full">
+                            <div className="w-10 rounded-full " data-tooltip-id="my-tooltip" style={{zIndex: "1"}} data-tooltip-content={user?.email}>
+                                
                                 {
                                     user?.photoURL ? <><img src={user.photoURL} alt="" /></> : <></>
                                 }
+                                <Tooltip place='bottom' id="my-tooltip" />
                             </div>
                         </label>
                         
