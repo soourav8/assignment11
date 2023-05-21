@@ -73,7 +73,7 @@ const handleLogout = () =>{
                 <div className="navbar-end flex-col-reverse items-end  md:flex-row md:gap-9 md:items-center">
                     {/* navbar logout button  */}
                     {
-                        user?.email && <li style={{listStyle: "none"}}><button className='btn btn-outline border-black text-white bg-[#32edcb] btn-xs sm:btn-sm md:btn-md lg:btn-lg' onClick={handleLogout}>Log Out</button></li>
+                        user?.email ? <li style={{listStyle: "none"}}><button className='btn btn-outline border-black text-white bg-[#32edcb] btn-xs sm:btn-sm md:btn-md lg:btn-lg' onClick={handleLogout}>Log Out</button></li> : <Link to="/login" className='btn btn-outline border-black text-white bg-[#32edcb] btn-xs sm:btn-sm md:btn-md lg:btn-lg'>Login</Link>
                     }
                 
 

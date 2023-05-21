@@ -1,11 +1,15 @@
 import React from 'react';
 import Banner from '../Banner/Banner';
-import Cards from '../Cards/Cards';
+import Gallery from '../Gallery/Gallery';
+
+
 
 const Home = () => {
     return (
         <div>
             <Banner></Banner>
+            <Gallery></Gallery>
+            
            
         </div>
     );

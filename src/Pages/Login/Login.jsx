@@ -6,6 +6,8 @@ import { Link, Navigate, useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const [success, setSuccess] = useState("")
+    const[user,setUser] = useState("")
+    const [error, setError] = useState("")
     const { login, googleSignIn } = useContext(AuthContext)
     const navigate = useNavigate()
 
@@ -17,12 +19,15 @@ const Login = () => {
         login(email, password)
             .then(result => {
                 const user = result.user;
-                console.log(user)
+                setUser(user)
                 if (user) {
                     setSuccess("Login Successful")
                     navigate('/')
                 }
 
+            })
+            .catch(error=>{
+                setError(error.message)
             })
     }
 
@@ -73,7 +78,10 @@ const Login = () => {
 
                                 <input className="btn btn-primary" type="submit" value="Login" />
                                 <button onClick={handleGoogle} className='btn  mt-3'>Login with Google</button>
-                                <p className='text-center text-success'>{success}</p>
+                                {
+                                    user ? <p className='text-center text-success'>{success}</p> : <p className='text-center text-error'>{error}</p>
+                                    
+                                }
                             </div>
 
                         </form>

@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
     const [success, setSuccess] = useState('')
+    const [user, setUser] = useState('')
     const [error, setError] = useState("")
     const { createUser } = useContext(AuthContext);
     const navigate = useNavigate()
@@ -32,6 +33,7 @@ const SignUp = () => {
         createUser(email, password)
             .then(result => {
                 const user = result.user;
+                
 
                 //update user name and photo Url
                 const auth = getAuth();
@@ -49,7 +51,7 @@ const SignUp = () => {
 
 
                 if (user) {
-                    console.log(user)
+                    setError(user)
                     setSuccess("Sign Up Successful")
                     navigate('/')
 
@@ -109,8 +111,11 @@ const SignUp = () => {
                             </div>
                             <div className="form-control mt-6">
                                 <input className="btn btn-primary" type="submit" value="Sign Up" />
-                                <p className='text-center text-success'>{success}</p>
-                                <p>{error}</p>
+                                {
+                                    user ? <p className='text-center text-success'>{success}</p> :  <p className='text-center text-error'>{error}</p>
+                                }
+                                
+                               
 
                             </div>
                         </form>
