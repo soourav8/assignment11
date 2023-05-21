@@ -17,8 +17,8 @@ const AddToy = () => {
         const price = form.price.value;
         const rating = form.rating.value;
         const availableQuantity = form.availableQuantity.value;
-        const detailDescription = form.detailDescription.value;
-        const productImageUrl = form.productImageUrl.value;
+        const description = form.detailDescription.value;
+        const picture = form.productImageUrl.value;
         const newProduct = {
             name,
             sellerName,
@@ -27,12 +27,12 @@ const AddToy = () => {
             price,
             rating,
             availableQuantity,
-            detailDescription,
-            productImageUrl
+            description,
+            picture
         }
  console.log(newProduct)
 
- fetch('http://localhost:5000/myToys', {
+ fetch('http://localhost:5000/toys', {
     method : 'POST',
     headers: {
         'content-type': "application/json"

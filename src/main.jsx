@@ -17,6 +17,8 @@ import Login from './Pages/Login/Login';
 import SignUp from './Pages/SignUp/SignUp';
 import AuthProvider from './provider/AuthProvider';
 import ViewDetails from './Pages/ViewDetails/ViewDetails';
+import { fetchSignInMethodsForEmail } from 'firebase/auth';
+import PrivateRoute from './PrivateRoute/PrivateRoute';
 
 const router = createBrowserRouter([
   {
@@ -34,7 +36,8 @@ const router = createBrowserRouter([
       },
       {
         path: '/myToys',
-        element: <MyToys></MyToys>
+        element: <PrivateRoute><MyToys></MyToys></PrivateRoute>,
+       
       },
       {
         path: '/addToy',
