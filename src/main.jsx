@@ -16,6 +16,7 @@ import Blogs from './Pages/Blogs/Blogs';
 import Login from './Pages/Login/Login';
 import SignUp from './Pages/SignUp/SignUp';
 import AuthProvider from './provider/AuthProvider';
+import ViewDetails from './Pages/ViewDetails/ViewDetails';
 
 const router = createBrowserRouter([
   {
@@ -50,6 +51,11 @@ const router = createBrowserRouter([
       {
         path: '/signUp',
         element: <SignUp></SignUp>
+      },
+      {
+        path: "/toy/:id",
+        element: <ViewDetails></ViewDetails>,
+        loader : ({params}) => fetch(`http://localhost:5000/toys/${params.id}`)
       }
 
 
