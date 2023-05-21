@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../../provider/AuthProvider';
+import Swal from 'sweetalert2'
 
 const AddToy = () => {
     const {user} = useContext(AuthContext);
@@ -17,6 +18,7 @@ const AddToy = () => {
         const rating = form.rating.value;
         const availableQuantity = form.availableQuantity.value;
         const detailDescription = form.detailDescription.value;
+        const productImageUrl = form.productImageUrl.value;
         const newProduct = {
             name,
             sellerName,
@@ -25,9 +27,32 @@ const AddToy = () => {
             price,
             rating,
             availableQuantity,
-            detailDescription
+            detailDescription,
+            productImageUrl
         }
  console.log(newProduct)
+
+ fetch('http://localhost:5000/myToys', {
+    method : 'POST',
+    headers: {
+        'content-type': "application/json"
+
+    },
+    body: JSON.stringify(newProduct)
+
+ })
+ .then(res=> res.json())
+ .then(data=>{
+    console.log(data)
+    if(data.insertedId){
+        Swal.fire({
+            title: 'Added',
+            text: 'Product Added successfully',
+            icon: 'success',
+            confirmButtonText: 'continue'
+          })
+    }
+ })
 
     }
 
@@ -37,6 +62,7 @@ const AddToy = () => {
     return (
         <form onSubmit={handleProduct}>
             <div >
+                
 
                 <div className="card-body grid gird-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6  ">
 
@@ -93,6 +119,12 @@ const AddToy = () => {
                             <span className="label-text">Detail description</span>
                         </label>
                         <input type="text" name='detailDescription' placeholder="Detail description" className="input input-bordered" />
+                    </div>
+                    <div className="form-control">
+                        <label className="label">
+                            <span className="label-text">Product Image</span>
+                        </label>
+                        <input type="text" name='productImageUrl' placeholder="Product image url" className="input input-bordered" />
                     </div>
 
 

@@ -5,7 +5,7 @@ const Card = ({toy}) => {
 
     return (
         <div className=''>
-            <div className="card card-compact w-96 bg-base-100 shadow-xl">
+            <div className="card card-compact w-75 lg:w-96 bg-base-100 shadow-xl">
                 <figure><img className='w-[25rem] h-[20rem]' src={toy.picture} alt="Shoes" /></figure>
                 <div className="card-body">
                     <h2 className="card-title">{toy.name}</h2>
@@ -15,7 +15,7 @@ const Card = ({toy}) => {
                     <div className="card-actions justify-end">
                         
                         {<Link to = {`/toy/${toy._id}`}>
-                        <button className='btn btn-primary'>View Details</button>
+                        <button className='btn btn-primary btn-xs sm:btn-sm md:btn-md lg:btn-lg'>View Details</button>
 
                         </Link>}
                         
